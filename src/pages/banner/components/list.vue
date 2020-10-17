@@ -22,6 +22,7 @@
 </template>
 
 <script>
+var x=10;
 import { mapGetters, mapActions } from "vuex";
 import { successAlert, warningAlert } from "../../../utils/alert";
 import { reqBannerDel } from "../../../utils/request";
