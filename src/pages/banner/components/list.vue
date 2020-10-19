@@ -8,11 +8,16 @@
         <el-table-column prop="img" label="图片"> </el-table-column>
         <el-table-column prop="status" label="状态">
           <template slot-scope="scope">
-            <el-button v-if="scope.row.status == 1" type="primary">启用</el-button>
+            <el-button v-if="scope.row.status == 1" type="primary"
+              >启用</el-button
+            >
             <el-button v-else type="info">禁用</el-button>
-          </template> </el-table-column><el-table-column prop="status" label="操作">
+          </template> </el-table-column
+        ><el-table-column prop="status" label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" @click="edit(scope.row.id)">编辑</el-button>
+            <el-button type="primary" @click="edit(scope.row.id)"
+              >编辑</el-button
+            >
             <del-btn @confirm="dele(scope.row.id)"></del-btn>
           </template>
         </el-table-column>
@@ -20,9 +25,7 @@
     </template>
   </div>
 </template>
-
 <script>
-var x=10;
 import { mapGetters, mapActions } from "vuex";
 import { successAlert, warningAlert } from "../../../utils/alert";
 import { reqBannerDel } from "../../../utils/request";

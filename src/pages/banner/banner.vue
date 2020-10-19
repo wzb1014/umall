@@ -1,7 +1,7 @@
 <template>
   <div>
 
-      <v-add></v-add>
+      <v-add :info='info' ref=add></v-add>
       <v-list @edit='edit'></v-list>
 
   </div>
@@ -24,8 +24,9 @@ export default {
   },
   methods:{
      edit(id){
+      this.info.isshow=true;
+      this.info.isAdd=false;
       this.$refs.add.look(id)
-      console.log(id);
     },
   }
 }

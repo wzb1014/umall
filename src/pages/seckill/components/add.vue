@@ -15,7 +15,6 @@
         <el-form-item label="活动时间" :label-width="formLabelWidth">
           <el-col :span="11">
             <el-date-picker
-          
               type="date"
               placeholder="开始日期"
               v-model="form.begintime"
@@ -23,7 +22,7 @@
             ></el-date-picker>
           </el-col>
           <el-col class="line" :span="2"></el-col>
-        
+
           <el-col :span="11">
             <el-date-picker
               type="date"
@@ -68,7 +67,6 @@
         <el-button type="primary" @click="add" v-if="info.isAdd == true"
           >添 加</el-button
         >
-
         <el-button type="primary" v-else @click="update">修 改</el-button>
       </div>
     </el-dialog>
@@ -95,7 +93,6 @@ export default {
 
   data() {
     return {
-   
       dialogTableVisible: false,
       dialogFormVisible: false,
       form: {
@@ -132,7 +129,7 @@ export default {
         second_cateid: "",
         goodsid: "",
         status: 1
-      }
+      };
     },
     look(id) {
       //发请求
@@ -148,9 +145,8 @@ export default {
     },
     //点击了添加按钮
     add() {
-
-      this.form.begintime=this.form.begintime.getTime()
-        this.form.endtime=this.form.endtime.getTime()
+      this.form.begintime = this.form.begintime.getTime();
+      this.form.endtime = this.form.endtime.getTime();
       reqSeckillAdd(this.form).then(res => {
         if (res.data.code == 200) {
           //成功

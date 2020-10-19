@@ -1,24 +1,28 @@
 <template>
   <div>
-    <el-dialog :title="info.isAdd==true?'添加':'修改'" :visible.sync="info.isshow">
+    <el-dialog
+      :title="info.isAdd == true ? '添加' : '修改'"
+      :visible.sync="info.isshow"
+    >
       <el-form :model="form">
-
-
         <el-form-item label="菜单名称" :label-width="formLabelWidth">
           <el-input
             v-model="form.title"
             autocomplete="off"
             placeholder="系统设置"
           ></el-input>
-
-            </el-form-item>
-      <el-form-item label="上级菜单" :label-width="formLabelWidth">
+        </el-form-item>
+        <el-form-item label="上级菜单" :label-width="formLabelWidth">
           <el-select
             v-model="form.pid"
             placeholder="请选择上级菜单"
             @change="ha"
           >
-            <el-option label="顶级菜单" :value="0" :label-width="formLabelWidth"></el-option>
+            <el-option
+              label="顶级菜单"
+              :value="0"
+              :label-width="formLabelWidth"
+            ></el-option>
             <el-option
               v-for="item in list"
               :key="item.id"
@@ -33,7 +37,11 @@
           <el-radio v-model="form.type" :label="2" disabled>菜单</el-radio>
         </el-form-item>
 
-        <el-form-item label="菜单图标" v-if="form.type == 1" :label-width="formLabelWidth">
+        <el-form-item
+          label="菜单图标"
+          v-if="form.type == 1"
+          :label-width="formLabelWidth"
+        >
           <el-select v-model="form.icon" placeholder="请选择上级菜单">
             <el-option v-for="item in icons" :key="item" :value="item">
               <i :class="item"></i>
@@ -64,7 +72,9 @@
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="qu">取 消</el-button>
-        <el-button type="primary" @click="add" v-if='info.isAdd==true'>添 加</el-button>
+        <el-button type="primary" @click="add" v-if="info.isAdd == true"
+          >添 加</el-button
+        >
 
         <el-button type="primary" v-else @click="update">修 改</el-button>
       </div>
@@ -73,7 +83,11 @@
 </template>
 
 <script>
-import { reqMenuAdd ,reqMenuDetail  ,reqMenuUpdate} from "../../../utils/request.js";
+import {
+  reqMenuAdd,
+  reqMenuDetail,
+  reqMenuUpdate
+} from "../../../utils/request.js";
 import { successAlert, warningAlert } from "../../../utils/alert";
 import { indexRoutes } from "../../../router/index";
 import { mapGetters, mapActions } from "vuex";
@@ -85,8 +99,6 @@ export default {
     })
   },
 
-    
-  
   data() {
     return {
       dialogTableVisible: false,
@@ -122,12 +134,12 @@ export default {
         this.form.type = 2;
       }
     },
-cancel(){
-     this.info.isshow = false;
-},
+    cancel() {
+      this.info.isshow = false;
+    },
     qu() {
-   this.info.isshow = false;
-      warningAlert('取消成功');
+      this.info.isshow = false;
+      warningAlert("取消成功");
     },
     empty() {
       this.form = {
@@ -141,7 +153,7 @@ cancel(){
     },
     look(id) {
       //发请求
-      reqMenuDetail(id).then((res) => {
+      reqMenuDetail(id).then(res => {
         if (res.data.code == 200) {
           //这个时候form是没有id的
           this.form = res.data.list;
@@ -172,7 +184,7 @@ cancel(){
       });
     },
     update() {
-      reqMenuUpdate(this.form).then((res) => {
+      reqMenuUpdate(this.form).then(res => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
           this.empty();
@@ -182,7 +194,7 @@ cancel(){
           warningAlert(res.data.msg);
         }
       });
-    },
+    }
   }
 };
 </script>

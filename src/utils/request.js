@@ -399,7 +399,7 @@ export const reqMemberDetail=(uid)=>{
 export const reqMemberUpdate=(data)=>{
     return axios ({
         url:baseUrl+'/api/memberedit',
-        method:'POST ',
+        method:'post',
         data:data
     })
 }
@@ -417,7 +417,7 @@ export const reqLogin = (params) => {
 
 //==================轮播图管理=========================
 
-//列表
+//添加
 export const reqBannerAdd=(form)=>{
     let data = new FormData()
     for (let i in form) {
@@ -434,7 +434,7 @@ export const reqBannerAdd=(form)=>{
 export const reqBannerList=(params)=>{
     return axios ({
         url:baseUrl+'/api/bannerlist',
-        method:'GET',
+        method:'get',
         params:params
     })
 }
@@ -500,4 +500,12 @@ export const reqSeckillUpdate=(data)=>{
         data:data
     })
    
+}
+//秒杀删除
+export const reqSeckillDele=(id)=>{
+    return axios ({
+        url:baseUrl+'/api/seckdelete',
+        method:'post',
+        data:{id}
+    })
 }

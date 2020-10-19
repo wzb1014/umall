@@ -23,15 +23,13 @@
           ></el-switch>
         </el-form-item>
 
-        <el-form-item  :label-width="formLabelWidth">
-          <div  >
+        <el-form-item :label-width="formLabelWidth">
+          <div>
             <el-button @click="qu">取 消</el-button>
-            <el-button type="primary"  @click="add">添 加</el-button>
+            <el-button type="primary" @click="add">添 加</el-button>
             <!-- <el-button type="primary" >修 改</el-button> -->
           </div>
         </el-form-item>
-
-
       </el-form>
     </el-dialog>
   </div>
@@ -58,15 +56,16 @@ export default {
       formLabelWidth: "120px"
     };
   },
+  computed: {
+    ...mapGetters({
+      list: "banner/list"
+    })
+  },
   methods: {
-
-    
- ...mapActions({
+    ...mapActions({
       //请求菜单list
-      reqListAction: "Banner/reqListAction",
+      reqListAction: "banner/reqListAction"
     }),
-
-
 
     getFile(e) {
       let file = e.target.files[0];
@@ -77,31 +76,35 @@ export default {
       this.imgUrl = URL.createObjectURL(file);
       this.form.img = file;
     },
-
-    add() {
-      console.log(this.form);
-      reqBannerAdd(this.form).then(res => {
+    look(id) {
+      //发请求
+      this.dialogFormVisible=true,
+      reqBannerDetail(id).then(res => {
         if (res.data.code == 200) {
-          successAlert(res.data.msg);
-         
-          this.dialogFormVisible=false;
-
-          this.reqListAction();
-          
+          //这个时候form是没有id的
+          this.form = res.data.list;
+          this.form.id = id;
         } else {
           warningAlert(res.data.msg);
         }
       });
     },
-    qu(){
-      this.dialogFormVisible=false
+    add() {
+      console.log(this.form);
+      reqBannerAdd(this.form).then(res => {
+        if (res.data.code == 200) {
+          successAlert(res.data.msg);
+          this.reqListAction();
+          this.dialogFormVisible = false;
+        } else {
+          warningAlert(res.data.msg);
+        }
+      });
+    },
+    qu() {
+      this.dialogFormVisible = false;
     }
-  },
-
-
- 
-  
- 
+  }
 };
 </script>
 

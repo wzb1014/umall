@@ -16,7 +16,7 @@
           </template> </el-table-column><el-table-column prop="status" label="操作">
           <template slot-scope="scope">
             <el-button type="primary" @click="edit(scope.row.uid)">编辑</el-button>
-            <del-btn @confirm="dele(scope.row.uid)"></del-btn>
+            <!-- <del-btn @confirm="dele(scope.row.uid)"></del-btn> -->
           </template>
         </el-table-column>
       </el-table>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import {reqMemberList,reqMemberDetail,reqMemberUpdate} from '../../../utils/request'
 import{mapGetters,mapActions} from 'vuex'
 export default {
   data() {
@@ -49,7 +50,10 @@ export default {
   methods:{
     ...mapActions({
       reqListAction:'member/reqListAction'
-    })
+    }),
+    edit(uid){
+      this.$emit('edit',uid)
+    },
   },
   mounted(){
     this.reqListAction()

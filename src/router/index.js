@@ -59,11 +59,11 @@ export default new Router({
       component:()=>import('../pages/login/login.vue')
     },
     {
-      path:'/index',
+      path:'/',
       component:()=>import('../pages/index/index.vue'),
       children: [
         {
-          path: "",
+          path: "home",
           component: () => import("../pages/home/home.vue"),
         },
         ...indexRoutes
